@@ -13,6 +13,10 @@ class Estado():
         self.quantidade += nova_qtd
 
 
+    def diminui_casos(self,menos):
+        self.quantidade -= menos
+
+
     def mostra_sigla(self):
         return self.sigla
 
@@ -21,7 +25,7 @@ class Estado():
         return "..Nome: "+ self.nome.ljust(20) + "..Sigla: "+self.sigla.ljust(5)+ "..Pais: "+self.pais.ljust(10)+ "..Casos no Estado: "+str(self.quantidade).ljust(10)
 
 
-class Cidade:
+class Cidade():
     def __init__(self,nome,estado):
         self.nome = nome
         self.estado = estado
@@ -31,10 +35,17 @@ class Cidade:
     def atualiza_casos_cidade(self,nova_qtd):
         self.casos += nova_qtd
         self.estado.atualiza_casos(nova_qtd)
+    
+
+    def diminui_casos_cidade(self, menos):
+        self.casos -= menos
+        self.estado.diminui_casos(menos)
 
 
     def __str__(self):
-        return "..Nome: "+self.nome.ljust(15) + str(self.estado).ljust(5) + "..Casos na Cidade: "+str(self.casos).ljust(5)
+        return "..Nome: "+self.nome.ljust(15) + "..Casos na Cidade: "+str(self.casos).ljust(5)
+
+
 
 listaestado = []
 listacidade = []
@@ -104,8 +115,22 @@ def casos_cidade():
             except: input('..Erro..Digite apenas numeros..[Enter]')
     cidade_escolhida = atualizar()
     cidade_escolhida.atualiza_casos_cidade(ler_casos())
-    
 
+
+def tira_casos():
+    def tirar():
+        while True:
+            try:
+                qtde = int(input("Digite a quantidade de melhoras Cidade: "))
+                if qtde >= 0:
+                    return qtde
+                else:
+                    print("..Erro..A quantidade nao pode ser menor que 0..[Enter]")
+            except: input('..Erro..Digite apenas numeros..[Enter]')
+    cidade_escolhida = atualizar()
+    cidade_escolhida.diminui_casos_cidade(tirar())
+
+    
 def relatorio_cidade():
     for a in listacidade:
         print(a)
@@ -148,6 +173,7 @@ while True:
     3- Relatorio de Estados.
     4- Relatorio de Cidades.
     5- Atualizar casos na Cidade.
+    6- Escluir numero de casos na Cidade.
     
     Escolha: ''')
 
@@ -163,5 +189,7 @@ while True:
         relatorio_cidade()
     elif e == '5':
         casos_cidade()
+    elif e == '6':
+        tira_casos()
     else:
         input('..Erro! Opção invalida..')

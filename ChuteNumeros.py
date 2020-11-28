@@ -1,5 +1,5 @@
 
-# Objetivo: Criar um algorítimo que gera um valor aleatório e eu tenho que ficar tentando o número até eu acertar.
+# Objetivo: Criar um algorítimo que gera um valor aleatório, tenho que ficar tentando o número até acertar.
 
 import random 
 import PySimpleGUI as sg
